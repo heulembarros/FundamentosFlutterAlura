@@ -32,7 +32,7 @@ class FormularioTransferencia extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: TextField(
-                controller: TextEditingController(),
+                controller: _controladorCampoNumeroConta,
                 style: TextStyle(
                   fontSize: 24.0,
                 ),
@@ -44,6 +44,7 @@ class FormularioTransferencia extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: TextField(
+                controller: _controladorCampoValor,
                 style: TextStyle(
                   fontSize: 24.0,
                 ),
@@ -58,7 +59,13 @@ class FormularioTransferencia extends StatelessWidget {
               color: Colors.deepPurple,
               child: Text('Confirmar'),
               onPressed: () {
-                debugPrint('CONFIRMADO');
+                debugPrint('clicou no confirmar');
+                final String numeroConta = _controladorCampoNumeroConta.text;
+                final double valor = double.tryParse(_controladorCampoValor.text);
+                if(numeroConta != null && valor != null){
+                  final transferenciaCriada = Transferencia(valor, numeroConta);
+                  debugPrint('$transferenciaCriada');
+                }
               },
             )
           ],
@@ -145,9 +152,15 @@ class ItemTransferencia extends StatelessWidget {
   }
 }
 
-class Transferencia {
+
+class Transferencia{
   final double valor;
   final String numeroConta;
 
   Transferencia(this.valor, this.numeroConta);
+
+  @override
+  String toString() {
+    return 'Transferencia{valor: $valor, numeroConta: $numeroConta}';
+  }
 }
