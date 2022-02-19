@@ -1,5 +1,5 @@
-
 import 'package:bytebank/models/transferencia.dart';
+import 'package:bytebank/screens/menu_drawer.dart';
 import 'package:bytebank/screens/transferencia/formulario.dart';
 import 'package:flutter/material.dart';
 
@@ -49,14 +49,13 @@ class ListaTranferenciaState extends State<ListaTranferencias> {
             if (transferenciaRecebida != null) {
               setState(() {
                 widget._transferencias.add(transferenciaRecebida);
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: const Text('Transferência Realizada!'),
-                    action: SnackBarAction(
-                      label: 'Info',
-                      onPressed: () {},
-                    ),
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: const Text('Transferência Realizada!'),
+                  action: SnackBarAction(
+                    label: 'Info',
+                    onPressed: () {},
                   ),
+                ),
                 );
               });
             }
@@ -65,37 +64,7 @@ class ListaTranferenciaState extends State<ListaTranferencias> {
         // backgroundColor: Colors.deepPurple,
         child: const Icon(Icons.add),
       ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: const <Widget>[
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.deepPurple,
-              ),
-              child: Text(
-                'ByteBank',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                ),
-              ),
-            ),
-            ListTile(
-              leading: Icon(Icons.message),
-              title: Text('Mensagens'),
-            ),
-            ListTile(
-              leading: Icon(Icons.account_circle),
-              title: Text('Perfil'),
-            ),
-            ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Configurações'),
-            ),
-          ],
-        ),
-      ),
+      drawer: MenuDrawer(),
     );
   }
 }
